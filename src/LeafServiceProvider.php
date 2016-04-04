@@ -57,6 +57,10 @@ class LeafServiceProvider extends ServiceProvider
         $this->publishes( [
             __DIR__ . '/../resources/views/' => base_path( 'resources/views/vendor/leaf/admin' ),
         ], 'view' );
+
+        $this->publishes( [
+            __DIR__ . '/../resources/assets/' => base_path( 'resources/assets/vendor/leaf/admin' ),
+        ], 'assets' );
     }
 
     /**
