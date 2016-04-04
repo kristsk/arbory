@@ -1,3 +1,7 @@
 {
-  "validateIndentation": false
+  "validateIndentation": false,
+  "disallowMultipleVarDecl": false,
+  "requireTrailingComma": false,
+  "requirePaddingNewLinesAfterBlocks": false,
+  "safeContextKeyword": false
 }
