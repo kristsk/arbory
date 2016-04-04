@@ -3,8 +3,10 @@
 namespace CubeSystems\Leaf\Fields;
 
 use Closure;
+use CubeSystems\Leaf\Http\Controllers\AdminController;
 use CubeSystems\Leaf\Results\Row;
-use CubeSystems\Leaf\Scheme;
+use CubeSystems\Leaf\FieldSet;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\View;
 
 /**
@@ -52,14 +54,24 @@ abstract class AbstractField implements FieldInterface
     protected $after;
 
     /**
-     * @var Scheme
+     * @var FieldSet
      */
-    protected $scheme;
+    protected $fieldSet;
 
     /**
      * @var Closure
      */
     protected $saveWith;
+
+    /**
+     * @var Model
+     */
+    protected $model;
+
+    /**
+     * @var AdminController
+     */
+    protected $controller;
 
     /**
      * AbstractField constructor.
@@ -242,20 +254,20 @@ abstract class AbstractField implements FieldInterface
     }
 
     /**
-     * @return Scheme
+     * @return FieldSet
      */
-    public function getScheme()
+    public function getFieldSet()
     {
-        return $this->scheme;
+        return $this->fieldSet;
     }
 
     /**
-     * @param Scheme $scheme
+     * @param FieldSet $fieldSet
      * @return $this
      */
-    public function setScheme( Scheme $scheme )
+    public function setFieldSet( FieldSet $fieldSet )
     {
-        $this->scheme = $scheme;
+        $this->fieldSet = $fieldSet;
 
         return $this;
     }
@@ -288,6 +300,54 @@ abstract class AbstractField implements FieldInterface
     }
 
     /**
+     * @return Model
+     */
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
+     * @param Model $model
+     * @return $this
+     */
+    public function setModel( $model )
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
+    /**
+     * @return AdminController
+     */
+    public function getController()
+    {
+        return $this->controller;
+    }
+
+    /**
+     * @param AdminController $controller
+     * @return $this
+     */
+    public function setController( $controller )
+    {
+        $this->controller = $controller;
+
+        return $this;
+    }
+
+    /**
+     * @param Model $model
+     * @param array $input
+     * @return null
+     */
+    public function postUpdate( Model $model, array $input = [] )
+    {
+        return null;
+    }
+
+    /**
      * @return bool
      */
     public function isSearchable()
@@ -301,6 +361,41 @@ abstract class AbstractField implements FieldInterface
     public function isSortable()
     {
         return true;
+    }
+
+
+
+
+
+    /**
+     * TODO: Move to trait
+     */
+
+    protected $inputNamespace;
+
+    public function getInputName()
+    {
+        $nameParts = preg_split( '/\./', $this->inputNamespace, NULL, PREG_SPLIT_NO_EMPTY );
+        $nameParts[] = $this->getName();
+
+        return 'resource[' . implode( '][', $nameParts ) . ']';
+    }
+
+    public function getInputId()
+    {
+        return strtr( $this->getInputName(), [ '[' => '_', ']' => '' ] );
+    }
+
+    public function getInputNamespace()
+    {
+        return $this->inputNamespace;
+    }
+
+    public function setInputNamespace( $namespace )
+    {
+        $this->inputNamespace = $namespace;
+
+        return $this;
     }
 
     /**

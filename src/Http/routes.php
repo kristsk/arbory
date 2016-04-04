@@ -6,7 +6,6 @@ use \CubeSystems\Leaf\Http\Controllers\ResourceController;
 
 Route::group( [ 'prefix' => config( 'leaf.uri' ) ], function ()
 {
-
     Route::get( '/', [
         'as' => 'admin.login',
         'uses' => LoginController::class . '@index'
@@ -52,25 +51,14 @@ Route::group( [ 'prefix' => config( 'leaf.uri' ) ], function ()
         'uses' => ResourceController::class . '@update'
     ] );
 
-    Route::get( 'model/{model}/{id}/confirm_destroy', [
-        'as' => 'admin.model.confirm_destroy',
-        'uses' => ResourceController::class . '@confirmDestroy'
-    ] );
-
     Route::delete( 'model/{model}/{id}', [
         'as' => 'admin.model.destroy',
         'uses' => ResourceController::class . '@destroy'
     ] );
 
-    Route::get( 'model/{model}/{id}/{action}', [
-        'as' => 'admin.model.action',
-        'uses' => ResourceController::class . '@handleGetAction'
+    Route::get( 'model/{model}/dialog/{dialog}', [
+        'as' => 'admin.model.dialog',
+        'uses' => ResourceController::class . '@dialog'
     ] );
-
-    Route::post( 'model/{model}/{id}/{action}', [
-        'as' => 'admin.model.action',
-        'uses' => ResourceController::class . '@handlePostAction'
-    ] );
-
 
 } );

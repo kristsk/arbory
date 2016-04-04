@@ -7,10 +7,10 @@ use CubeSystems\Leaf\Fields\FieldInterface;
 use CubeSystems\Leaf\Http\Controllers\AdminController;
 
 /**
- * Class Scheme
+ * Class FieldSet
  * @package CubeSystems\Leaf
  */
-class Scheme
+class FieldSet
 {
     /**
      * @var string
@@ -28,7 +28,7 @@ class Scheme
     protected $fields = [ ];
 
     /**
-     * Scheme constructor.
+     * FieldSet constructor.
      * @param $resource
      * @param $controller
      */
@@ -49,18 +49,21 @@ class Scheme
 
         $field = FieldFactory::getFieldByType( $method, $name );
 
-        $this->field( $field );
+        $this->add( $field );
 
         return $field;
     }
 
     /**
      * @param FieldInterface $field
+     * @return FieldInterface
      */
-    public function field( FieldInterface $field )
+    public function add( FieldInterface $field )
     {
-        $field->setScheme( $this );
+        $field->setFieldSet( $this );
         $this->fields[$field->getName()] = $field;
+
+        return $field;
     }
 
     /**
@@ -82,7 +85,7 @@ class Scheme
             return null;
         }
 
-        return $this->fieds[$name];
+        return $this->fields[$name];
     }
 
     /**
@@ -91,7 +94,7 @@ class Scheme
      */
     public function hasField( $name )
     {
-        return array_key_exists( $name, $this->fieds );
+        return array_key_exists( $name, $this->fields );
     }
 
     /**

@@ -3,8 +3,10 @@
 namespace CubeSystems\Leaf\Fields;
 
 use Closure;
+use CubeSystems\Leaf\Http\Controllers\AdminController;
 use CubeSystems\Leaf\Results\Row;
-use CubeSystems\Leaf\Scheme;
+use CubeSystems\Leaf\FieldSet;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Interface FieldInterface
@@ -12,12 +14,6 @@ use CubeSystems\Leaf\Scheme;
  */
 interface FieldInterface
 {
-    /**
-     * FieldInterface constructor.
-     * @param $name string
-     */
-    public function __construct( $name );
-
     /**
      * @return string
      */
@@ -115,15 +111,15 @@ interface FieldInterface
     public function hasBefore();
 
     /**
-     * @return Scheme
+     * @return FieldSet
      */
-    public function getScheme();
+    public function getFieldSet();
 
     /**
-     * @param Scheme $scheme
+     * @param FieldSet $fieldSet
      * @return $this
      */
-    public function setScheme( Scheme $scheme );
+    public function setFieldSet( FieldSet $fieldSet );
 
     /**
      * @return Closure
@@ -140,6 +136,28 @@ interface FieldInterface
      * @return bool
      */
     public function hasSaveWith();
+
+    /**
+     * @return Model
+     */
+    public function getModel();
+
+    /**
+     * @param Model $model
+     * @return $this
+     */
+    public function setModel( $model );
+
+    /**
+     * @return AdminController
+     */
+    public function getController();
+
+    /**
+     * @param AdminController $controller
+     * @return $this
+     */
+    public function setController( $controller );
 
     /**
      * @return string
