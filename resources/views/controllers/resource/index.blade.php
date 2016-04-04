@@ -8,8 +8,8 @@
     <section>
 
         <header>
-            <h1>@lang('leaf.resources.all_resources')</h1>
-            <span class="extras totals only-text">@lang('leaf.pagination.items_found',['total'=>$paginator->total()])</span>
+            <h1>@lang('leaf::leaf.resources.all_resources')</h1>
+            <span class="extras totals only-text">@lang('leaf::leaf.pagination.items_found',['total'=>$paginator->total()])</span>
         </header>
 
         <div class="body">

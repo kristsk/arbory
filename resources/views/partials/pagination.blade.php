@@ -1,12 +1,12 @@
 @if ( $paginator->total() > 0)
     <div class="pagination">
         @if( $paginator->currentPage() > 1 )
-            <a class="button only-icon secondary previous" title="@lang('leaf.pagination.previous_page')" rel="prev"
+            <a class="button only-icon secondary previous" title="@lang('leaf::leaf.pagination.previous_page')" rel="prev"
                href="{{$paginator->url($paginator->currentPage()-1)}}">
                 <i class="fa fa-chevron-left"></i>
             </a>
         @else
-            <button class="button only-icon secondary previous" title="@lang('leaf.pagination.previous_page')"
+            <button class="button only-icon secondary previous" title="@lang('leaf::leaf.pagination.previous_page')"
                     type="button" disabled="disabled">
                 <i class="fa fa-chevron-left"></i>
             </button>
@@ -25,12 +25,12 @@
         </select>
 
         @if( $paginator->hasMorePages() )
-            <a class="button only-icon secondary next" title="@lang('leaf.pagination.next_page')" rel="next"
+            <a class="button only-icon secondary next" title="@lang('leaf::leaf.pagination.next_page')" rel="next"
                href="{{$paginator->url($paginator->currentPage()+1)}}">
                 <i class="fa fa-chevron-right"></i>
             </a>
         @else
-            <button class="button only-icon secondary next" title="@lang('leaf.pagination.next_page')" type="button"
+            <button class="button only-icon secondary next" title="@lang('leaf::leaf.pagination.next_page')" type="button"
                     disabled="disabled">
                 <i class="fa fa-chevron-right"></i>
             </button>
